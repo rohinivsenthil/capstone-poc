@@ -1,14 +1,21 @@
 <!doctype html>
 <html>
   <head>
+    <link rel="stylesheet" href="index.css">
   </head>
   <body>
-    <label for="username">Username:</label>
-    <input type="text" id="username" autocomplete="off" required />
-    <label for="secret">Secret:</label>
-    <input type="text" id="secret" autocomplete="off" required />
+    <div class="login-container">
+      <div class="login-form">
 
-    <button onclick="login()">Login</button>
+        <label for="username">Username:</label>
+        <input type="text" id="username" autocomplete="off" class="login-input" required /> <br/>
+
+        <label for="secret">Password:</label>
+        <input type="password" id="secret" autocomplete="off" class="login-input" required /> <br/>
+
+        <button onclick="login()" class="login-btn">Login</button>
+      </div>
+    </div>
 
     <script>
       const loggedIn = localStorage.getItem("loggedIn");
@@ -19,10 +26,13 @@
       function login() {
         const username = document.getElementById("username").value;
         const secret = document.getElementById("secret").value;
+
+        // store user session in local storage 
         if (username !== "" && secret !== "") {
           localStorage.setItem("username", username)
           localStorage.setItem("secret", secret)
           localStorage.setItem("loggedIn", true)
+
           window.location = "index.html"
         }
       }
