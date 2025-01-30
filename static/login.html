@@ -1,0 +1,31 @@
+<!doctype html>
+<html>
+  <head>
+  </head>
+  <body>
+    <label for="username">Username:</label>
+    <input type="text" id="username" autocomplete="off" required />
+    <label for="secret">Secret:</label>
+    <input type="text" id="secret" autocomplete="off" required />
+
+    <button onclick="login()">Login</button>
+
+    <script>
+      const loggedIn = localStorage.getItem("loggedIn");
+      if (loggedIn) {
+        window.location = "index.html";
+      }
+
+      function login() {
+        const username = document.getElementById("username").value;
+        const secret = document.getElementById("secret").value;
+        if (username !== "" && secret !== "") {
+          localStorage.setItem("username", username)
+          localStorage.setItem("secret", secret)
+          localStorage.setItem("loggedIn", true)
+          window.location = "index.html"
+        }
+      }
+    </script>
+  </body>
+</html>

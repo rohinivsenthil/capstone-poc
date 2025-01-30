@@ -1,0 +1,15 @@
+<!doctype html>
+<html>
+  <head>
+  </head>
+  <body>
+    <script>
+      const loggedIn = localStorage.getItem("loggedIn");
+      if (loggedIn) {
+        window.location = "comments.html";
+      } else {
+        window.location = "login.html";
+      }
+    </script>
+  </body>
+</html>

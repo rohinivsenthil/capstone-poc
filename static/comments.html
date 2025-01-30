@@ -1,0 +1,56 @@
+<!doctype html>
+<html>
+  <head>
+  </head>
+  <body>
+    <button onclick="logout()">Logout</button>
+
+    <div id="comments">
+    </div>
+
+    <textarea id="new-comment"></textarea>
+    <button onclick="post()">Post</button>
+
+    <script>
+      const loggedIn = localStorage.getItem("loggedIn");
+      if (!loggedIn) {
+        window.location = "index.html";
+      }
+
+      function logout() {
+        localStorage.clear();
+        window.location = "index.html";
+      }
+
+      function post() {
+        const el = document.getElementById("new-comment");
+
+        fetch(
+          "/comment",
+          {
+            method: "POST",
+            body: JSON.stringify({ data: el.value }),
+            headers: { 'Content-Type': "application/json" },
+          },
+        ).then(res => res.json()).then(refresh)
+
+        el.value = "";
+      }
+
+      function refresh() {
+        fetch("/comment").then((res) => res.json()).then(comments => {
+          const el = document.getElementById("comments");
+          el.innerHTML = '';
+
+          comments.forEach(comment => {
+            const p = document.createElement("p");
+            p.innerHTML = comment;
+            el.appendChild(p);
+          });
+        });
+      }
+
+      refresh();
+    </script>
+  </body>
+</html>
