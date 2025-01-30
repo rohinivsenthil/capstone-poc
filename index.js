@@ -2,7 +2,7 @@ const express = require('express');
 const app = express();
 const port = 3000;
 
-const comments = [];
+const comments = ["[1/30/2025, 1:24:25 PM] Hi! This is a comment"];
 
 app.use(express.json());
 app.use(express.static('static'));
