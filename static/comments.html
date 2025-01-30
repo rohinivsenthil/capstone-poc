@@ -1,15 +1,21 @@
-<!doctype html>
+<!DOCTYPE html>
 <html>
   <head>
+    <link rel="stylesheet" href="index.css" />
   </head>
   <body>
-    <button onclick="logout()">Logout</button>
+    <div class="container" style="flex-direction: column">
+      <div class="logout-header">
+        <button onclick="logout()">Logout</button>
+      </div>
+      <br />
+      <div class="comments-container">
+        <div id="comments" class="comments-list"></div>
 
-    <div id="comments">
+        <textarea id="new-comment" class="comments-box" placeholder="Post a comment..."></textarea> <br />
+        <button onclick="post()">Post</button>
+      </div>
     </div>
-
-    <textarea id="new-comment"></textarea>
-    <button onclick="post()">Post</button>
 
     <script>
       const loggedIn = localStorage.getItem("loggedIn");
@@ -25,29 +31,30 @@
       function post() {
         const el = document.getElementById("new-comment");
 
-        fetch(
-          "/comment",
-          {
-            method: "POST",
-            body: JSON.stringify({ data: el.value }),
-            headers: { 'Content-Type': "application/json" },
-          },
-        ).then(res => res.json()).then(refresh)
+        fetch("/comment", {
+          method: "POST",
+          body: JSON.stringify({ data: `[${new Date().toLocaleString()}] ${el.value}` }),
+          headers: { "Content-Type": "application/json" },
+        })
+          .then((res) => res.json())
+          .then(refresh);
 
         el.value = "";
       }
 
       function refresh() {
-        fetch("/comment").then((res) => res.json()).then(comments => {
-          const el = document.getElementById("comments");
-          el.innerHTML = '';
+        fetch("/comment")
+          .then((res) => res.json())
+          .then((comments) => {
+            const el = document.getElementById("comments");
+            el.innerHTML = "";
 
-          comments.forEach(comment => {
-            const p = document.createElement("p");
-            p.innerHTML = comment;
-            el.appendChild(p);
+            comments.forEach((comment) => {
+              const p = document.createElement("p");
+              p.innerHTML = comment;
+              el.appendChild(p);
+            });
           });
-        });
       }
 
       refresh();
