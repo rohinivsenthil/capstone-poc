@@ -1,0 +1,14 @@
+{
+  "name": "capstone-poc",
+  "version": "1.0.0",
+  "description": "SWEN-780 Capstone(Proof of Concept)",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "rv8542",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.21.2"
+  }
+}
