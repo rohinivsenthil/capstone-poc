@@ -13,34 +13,35 @@
         <div id="comments" class="comments-list"></div>
 
         <form action="/comment" method="post">
-          <label for="date">Date:</label>
-          <input type="date" id="date" name="date" /> <br />
+          <div class="comments-form">
+            <label for="date" class="input-labels">Date:</label>
+            <input type="date" id="date" name="date" class="input-entries" />
 
-          <label for="job">Job:</label>
-          <select name="job" id="job">
-            <option value="SE">SE</option>
-            <option value="DS">DS</option>
-            <option value="CS">CS</option>
-            <option value="CE">CE</option>
-          </select>
-          <br />
+            <label for="job" class="input-labels">Job:</label>
+            <select name="job" id="job" class="input-entries">
+              <option value="SE">SE</option>
+              <option value="DS">DS</option>
+              <option value="CS">CS</option>
+              <option value="CE">CE</option>
+            </select>
 
-          <input type="radio" name="bool_question" id="bool_yes" value="Yes" />
-          <label for="bool_yes">Yes</label>
-          <input type="radio" name="bool_question" id="bool_no" value="No" />
-          <label for="bool_yes">No</label> <br />
+            <input type="radio" name="bool_question" id="bool_yes" value="UG" />
+            <label for="bool_yes">UG</label>
+            <input type="radio" name="bool_question" id="bool_no" value="PG" />
+            <label for="bool_yes" class="input-entries">PG</label>
 
-          <input type="checkbox" id="python" name="python" value="Python" />
-          <label for="python">Python</label>
-          <input
-            type="checkbox"
-            id="javascript"
-            name="javascript"
-            value="JavaScript"
-          />
-          <label for="javascript">JavaScript</label>
-          <input type="checkbox" id="lisp" name="lisp" value="Lisp" />
-          <label for="lisp">Lisp</label> <br />
+            <input type="checkbox" id="python" name="python" value="Python" />
+            <label for="python" class="input-labels">Python</label>
+            <input
+              type="checkbox"
+              id="javascript"
+              name="javascript"
+              value="JavaScript"
+            />
+            <label for="javascript" class="input-labels">JavaScript</label>
+            <input type="checkbox" id="lisp" name="lisp" value="Lisp" />
+            <label for="lisp">Lisp</label> <br />
+          </div>
 
           <textarea
             name="data"
@@ -85,7 +86,7 @@
             el.innerHTML = "";
 
             comments.forEach((comment) => {
-              console.log(comment)
+              console.log(comment);
               const commentContainer = document.createElement("div");
               commentContainer.classList.add("comments-user");
 
@@ -99,7 +100,11 @@
 
               addElementIfExists(commentContainer, "p", `[${comment.date}]`);
               addElementIfExists(commentContainer, "p", `{${comment.job},`);
-              addElementIfExists(commentContainer, "p", `${comment.bool_question},`);
+              addElementIfExists(
+                commentContainer,
+                "p",
+                `${comment.bool_question},`
+              );
 
               const languages = [
                 comment.python,

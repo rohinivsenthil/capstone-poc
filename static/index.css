@@ -59,3 +59,18 @@ body, html {
     margin-top: 1rem;
     margin-bottom: 1rem;
 }
+
+.comments-form {
+    display: flex;
+    justify-self: center;
+    margin-top: 2rem;
+    align-items: center;
+}
+
+.input-labels {
+    margin-right: .25rem
+}
+
+.input-entries {
+    margin-right: .75rem;
+}

@@ -5,7 +5,7 @@ const app = express();
 const urlencodedParser = bodyParser.urlencoded()
 const port = 3000;
 
-const comments = [{ data: "Hi! This is a comment" , date: "2025-01-31", job: "SE", bool_question: "No", python: "Python"}];
+const comments = [{ data: "Hi! This is a comment" , date: "2025-01-31", job: "SE", bool_question: "PG", python: "Python"}];
 
 app.use(express.static('static'));
 
