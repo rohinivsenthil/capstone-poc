@@ -6,6 +6,10 @@
   <body>
     <div class="container" style="flex-direction: column">
       <div class="logout-header">
+        <div>
+          Server Time:
+          <span id="server-time"></span>
+        </div>
         <button onclick="logout()">Logout</button>
       </div>
       <br />
@@ -17,7 +21,7 @@
             <label for="date" class="input-labels">Date:</label>
             <input type="date" id="date" name="date" class="input-entries" />
 
-            <label for="job" class="input-labels">Job:</label>
+            <label for="job" class="input-labels">Dept:</label>
             <select name="job" id="job" class="input-entries">
               <option value="SE">SE</option>
               <option value="DS">DS</option>
@@ -52,11 +56,6 @@
           <br />
           <button>Post</button>
         </form>
-      </div>
-
-      <div>
-        Server Time:
-        <div id="server-time"></div>
       </div>
     </div>
 
