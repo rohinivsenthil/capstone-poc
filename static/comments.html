@@ -12,8 +12,50 @@
       <div class="comments-container">
         <div id="comments" class="comments-list"></div>
 
-        <textarea id="new-comment" class="comments-box" placeholder="Post a comment..."></textarea> <br />
-        <button onclick="post()">Post</button>
+        <form action="/comment" method="post">
+          <label for="date">Date:</label>
+          <input type="date" id="date" name="date" /> <br />
+
+          <label for="job">Job:</label>
+          <select name="job" id="job">
+            <option value="SE">SE</option>
+            <option value="DS">DS</option>
+            <option value="CS">CS</option>
+            <option value="CE">CE</option>
+          </select>
+          <br />
+
+          <input type="radio" name="bool_question" id="bool_yes" value="Yes" />
+          <label for="bool_yes">Yes</label>
+          <input type="radio" name="bool_question" id="bool_no" value="No" />
+          <label for="bool_yes">No</label> <br />
+
+          <input type="checkbox" id="python" name="python" value="Python" />
+          <label for="python">Python</label>
+          <input
+            type="checkbox"
+            id="javascript"
+            name="javascript"
+            value="JavaScript"
+          />
+          <label for="javascript">JavaScript</label>
+          <input type="checkbox" id="lisp" name="lisp" value="Lisp" />
+          <label for="lisp">Lisp</label> <br />
+
+          <textarea
+            name="data"
+            id="new-comment"
+            class="comments-box"
+            placeholder="Post a comment..."
+          ></textarea>
+          <br />
+          <button>Post</button>
+        </form>
+      </div>
+
+      <div>
+        Server Time:
+        <div id="server-time"></div>
       </div>
     </div>
 
@@ -23,23 +65,16 @@
         window.location = "index.html";
       }
 
+      const urlParams = new URLSearchParams(window.location.search);
+      const serverTime = urlParams.get("server-time");
+      if (serverTime) {
+        const el = document.getElementById("server-time");
+        el.innerHTML = serverTime;
+      }
+
       function logout() {
         localStorage.clear();
         window.location = "index.html";
-      }
-
-      function post() {
-        const el = document.getElementById("new-comment");
-
-        fetch("/comment", {
-          method: "POST",
-          body: JSON.stringify({ data: `[${new Date().toLocaleString()}] ${el.value}` }),
-          headers: { "Content-Type": "application/json" },
-        })
-          .then((res) => res.json())
-          .then(refresh);
-
-        el.value = "";
       }
 
       function refresh() {
@@ -50,9 +85,33 @@
             el.innerHTML = "";
 
             comments.forEach((comment) => {
-              const p = document.createElement("p");
-              p.innerHTML = comment;
-              el.appendChild(p);
+              console.log(comment)
+              const commentContainer = document.createElement("div");
+              commentContainer.classList.add("comments-user");
+
+              const addElementIfExists = (parent, tag, value) => {
+                if (value) {
+                  const element = document.createElement(tag);
+                  element.innerHTML = value;
+                  parent.appendChild(element);
+                }
+              };
+
+              addElementIfExists(commentContainer, "p", `[${comment.date}]`);
+              addElementIfExists(commentContainer, "p", `{${comment.job},`);
+              addElementIfExists(commentContainer, "p", `${comment.bool_question},`);
+
+              const languages = [
+                comment.python,
+                comment.javascript,
+                comment.lisp,
+              ]
+                .filter(Boolean)
+                .join(" ");
+              addElementIfExists(commentContainer, "p", `${languages}}`);
+              addElementIfExists(commentContainer, "p", comment.data);
+
+              el.appendChild(commentContainer);
             });
           });
       }

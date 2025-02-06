@@ -48,6 +48,11 @@ body, html {
     background-color: beige;
 }
 
+.comments-user {
+    display: flex;
+    gap: .25rem;
+}
+
 .comments-box {
     width: 20rem;
     padding: .5rem;
