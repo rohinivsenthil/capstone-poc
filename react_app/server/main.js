@@ -10,6 +10,16 @@ const comments = [
     content: "Hi! This is a comment",
     link: "https://google.com",
   },
+  {
+    username: "user243",
+    content: "XSS in react is hard",
+    link: "https://google.com",
+  },
+  {
+    username: "rv8542",
+    content: "Homework is due today 2/20",
+    link: "https://google.com",
+  },
 ];
 
 // routes 

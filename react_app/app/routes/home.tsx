@@ -4,7 +4,7 @@ import { useEffect, useMemo, useState } from "react";
 
 export function meta({}: Route.MetaArgs) {
   return [
-    { title: "New React Router App" },
+    { title: "React XSS POC" },
     { name: "description", content: "Welcome to React Router!" },
   ];
 }
@@ -43,11 +43,11 @@ export default function Home() {
 
   const post = async (formData: FormData) => {
     const request = { username: credentials.username };
-    formData.forEach((value, key) => request[key] = value);
+    formData.forEach((value, key) => (request[key] = value));
 
     const resp = await fetch("http://localhost:3000/comment", {
       method: "POST",
-      headers: {"Content-Type": "application/json"},
+      headers: { "Content-Type": "application/json" },
       body: JSON.stringify(request),
     });
 
@@ -58,23 +58,50 @@ export default function Home() {
     <div>
       {!loggedIn ? (
         <form action={login}>
-          {" "}
-          <input name="username" placeholder="Username" />
-          <input name="password" type="password" placeholder="Password" />
-          <button>Login</button>
+          <div className="login-container">
+            <input
+              name="username"
+              placeholder="Username"
+              className="login-input"
+            />
+            <input
+              name="password"
+              type="password"
+              placeholder="Password"
+              className="login-input"
+            />
+            <button>Login</button>
+          </div>
         </form>
       ) : (
-        <button onClick={logout}>Logout</button>
+        <div className="login-container">
+          <button onClick={logout}>Logout</button>
+        </div>
       )}
 
       <div>
-        {comments.map((comment, key) => <Comment key={key} {...comment} />)}
+        <div className="comments-title">Discussion Area</div>
+        {comments.map((comment, key) => (
+          <Comment key={key} {...comment} />
+        ))}
       </div>
 
       <form action={post}>
-        <textarea name="content" placeholder="Comment" />
-        <input name="link" placeholder="Link" />
-        <button title={loggedIn ? undefined : "Login to post"} disabled={!loggedIn}>Post</button>
+        <div className="post-container">
+          <textarea
+            name="content"
+            placeholder="Post a comment..."
+            className="comments-textarea"
+          />
+          <input name="link" placeholder="Add a link" />
+          <button
+            title={loggedIn ? undefined : "Login to post"}
+            disabled={!loggedIn}
+            className="post-btn"
+          >
+            Post
+          </button>
+        </div>
       </form>
     </div>
   );
