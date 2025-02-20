@@ -13,3 +13,41 @@ body {
     color-scheme: dark;
   }
 } */
+
+.login-input {
+  margin-right: 1rem
+}
+
+.login-container {
+  padding: 1rem
+}
+
+.comments-conatiner {
+  margin-left: 1rem;
+  padding-left: .25rem;
+  padding-top: .25rem;
+  padding-bottom: .25rem;
+  background-color: antiquewhite;
+  width: 40%;
+}
+
+.comments-title {
+  padding: 1rem;
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.comments-textarea {
+  margin-bottom: .5rem;
+}
+
+.post-container {
+  padding: 1rem;
+  width: 40%;
+  display: flex;
+  flex-direction: column;
+}
+
+.post-btn {
+  margin-top: .5rem
+}
