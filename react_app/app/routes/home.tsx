@@ -12,9 +12,10 @@ export function meta({}: Route.MetaArgs) {
 export default function Home() {
   const [credentials, setCredentials] = useState({});
   const [comments, setComments] = useState([]);
+  const [code, setCode] = useState("");
   const loggedIn = useMemo(() => !!credentials?.username, [credentials]);
 
-  console.log(comments);
+  // console.log(comments);
 
   useEffect(() => {
     setCredentials(
@@ -94,6 +95,11 @@ export default function Home() {
             className="comments-textarea"
           />
           <input name="link" placeholder="Add a link" />
+          <input
+            name="code"
+            placeholder="Enter code to evaluate"
+            className="comments-code"
+          />
           <button
             title={loggedIn ? undefined : "Login to post"}
             disabled={!loggedIn}
