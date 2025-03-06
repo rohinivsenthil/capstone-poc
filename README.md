@@ -24,3 +24,6 @@ fetch("http://localhost:3000/comment", {
 - Evaluate: `javascript:alert(localStorage.getItem('credentials'))`
 
 - v-html
+
+### Angular Application
+- Evaluate: `javascript:alert(localStorage.getItem('credentials'))`
