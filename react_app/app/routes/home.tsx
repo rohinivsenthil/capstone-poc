@@ -14,6 +14,7 @@ export default function Home() {
   const [comments, setComments] = useState([]);
   const [code, setCode] = useState("");
   const loggedIn = useMemo(() => !!credentials?.username, [credentials]);
+  const [category, setCategory] = useState("");
 
   // console.log(comments);
 
@@ -26,6 +27,11 @@ export default function Home() {
       .then((resp) => resp.json())
       .then(setComments);
   }, []);
+
+  const handleCategoryChange = (category: any) => {
+    setCategory(category);
+    console.log(category);
+  };
 
   const login = (formData: FormData) => {
     const newCredentials = {
@@ -100,6 +106,15 @@ export default function Home() {
             placeholder="Enter code to evaluate"
             className="comments-code"
           />
+          <select
+            name="category"
+            value={category}
+            onChange={(event) => handleCategoryChange(event.target.value)}
+            className="comments-code"
+          >
+            <option id="0" value="Personal">Personal</option>
+            <option id="1" value="Work">Work</option>
+          </select>
           <button
             title={loggedIn ? undefined : "Login to post"}
             disabled={!loggedIn}
